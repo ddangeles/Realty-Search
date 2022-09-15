@@ -17,49 +17,56 @@ const options = {
 
     }
 }
-axios.request(options).then(function (response) {
-    for (i = 0; i < 100; i++) {
 
-        console.log(response.data.listings[i]);
-        var devEl = document.createElement("div");
-        var imgEl = document.createElement("img");
-        var priceEl = document.createElement("p");
-        var floorPlanEl = document.createElement("p");
-        var pokemonEl = document.createElement("div");
-        if (response.data.listings[i].price_raw < 500000) {
-            pokemonEl.setAttribute("class", "animate__animated animate__jello squirtleSprite")
-            pokemonEl.style.setProperty('--animate-duration', '5s')
-        } else if (response.data.listings[i].price_raw > 500000 && response.data.listings[i].price_raw < 1000000) {
-            pokemonEl.setAttribute("class", "animate__animated animate__jello wartortleSprite")
-            pokemonEl.style.setProperty('--animate-duration', '5s')
-        } else if (response.data.listings[i].price_raw > 1000000) {
-            pokemonEl.setAttribute("class", "animate__animated animate__jello blastoiseSprite")
-            pokemonEl.style.setProperty('--animate-duration', '5s')
-        }
-        devEl.textContent = response.data.listings[i].address;
-        imgEl.src = response.data.listings[i].photo;
-        priceEl.textContent = "Price " + response.data.listings[i].price;
+        axios.request(options).then(function (response) {
+            for(i = 0; i < 100; i++) {
+                
+                console.log(response.data.listings[i]);
+                var devEl = document.createElement("div");
+                var imgEl = document.createElement("img");
+                var priceEl = document.createElement("p");
+                var floorPlanEl = document.createElement("p");
+                var pokemonEl = document.createElement("div");
+                if (response.data.listings[i].price_raw <500000) {
+                    pokemonEl.setAttribute("class", "animate__animated animate__jello squirtleSprite")
+                    pokemonEl.style.setProperty('--animate-duration', '5s')
+                } else if (response.data.listings[i].price_raw >500000 && response.data.listings[i].price_raw <1000000) {
+                    pokemonEl.setAttribute("class", "animate__animated animate__jello wartortleSprite")
+                    pokemonEl.style.setProperty('--animate-duration', '5s')
+                } else if (response.data.listings[i].price_raw >1000000) {
+                    pokemonEl.setAttribute("class", "animate__animated animate__jello blastoiseSprite")
+                    pokemonEl.style.setProperty('--animate-duration', '5s')
+                }
+                devEl.textContent = response.data.listings[i].address;
+                if (response.data.listings[i].photo_count == 0) {
+                    imgEl.src = "./assets/images/404.jpg";
+                } else {
+                    imgEl.src = response.data.listings[i].photo;
+                }
+               // imgEl.src = response.data.listings[i].photo;
+                priceEl.textContent = "Price " + response.data.listings[i].price;
 
-        var hasBedrooms = response.data.listings[i].beds;
-        var floorPlanString = "";
-        if (hasBedrooms === 0) {
-            floorPlanString = "Studio";
-        } else {
-            floorPlanString = hasBedrooms + " Bedrooms";
-        }
+                var hasBedrooms = response.data.listings[i].beds;
+                var hasBathrooms = response.data.listings[i].baths;
+                var floorPlanString = "";
+                if (hasBedrooms === 0) {
+                    floorPlanString = "Studio - " + hasBathrooms + " Bath";
+                } else {
+                    floorPlanString = hasBedrooms + " Bedrooms - " + hasBathrooms + " Bath";
+                }
 
-        floorPlanEl.textContent = floorPlanString;
-        address.append(imgEl);
-        address.append(devEl);
-        address.append(priceEl);
-        address.append(pokemonEl);
-        address.append(floorPlanEl);
-
-    }
-    getPokes()
-}).catch(function (error) {
-    console.error(error);
-});
+                floorPlanEl.textContent = floorPlanString;
+                address.append(imgEl);
+                address.append(devEl);
+                address.append(priceEl);
+                address.append(floorPlanEl);
+                address.append(pokemonEl);
+            
+            }
+            getPokes()
+           }).catch(function (error) {
+            console.error(error);
+        });
 
 async function getPokes() {
     try {
