@@ -39,23 +39,29 @@
                     pokemonEl.style.setProperty('--animate-duration', '5s')
                 }
                 devEl.textContent = response.data.listings[i].address;
-                imgEl.src = response.data.listings[i].photo;
+                if (response.data.listings[i].photo_count == 0) {
+                    imgEl.src = "./assets/images/404.jpg";
+                } else {
+                    imgEl.src = response.data.listings[i].photo;
+                }
+               // imgEl.src = response.data.listings[i].photo;
                 priceEl.textContent = "Price " + response.data.listings[i].price;
 
                 var hasBedrooms = response.data.listings[i].beds;
+                var hasBathrooms = response.data.listings[i].baths;
                 var floorPlanString = "";
                 if (hasBedrooms === 0) {
-                    floorPlanString = "Studio";
+                    floorPlanString = "Studio - " + hasBathrooms + " Bath";
                 } else {
-                    floorPlanString = hasBedrooms + " Bedrooms";
+                    floorPlanString = hasBedrooms + " Bedrooms - " + hasBathrooms + " Bath";
                 }
 
                 floorPlanEl.textContent = floorPlanString;
                 address.append(imgEl);
                 address.append(devEl);
                 address.append(priceEl);
-                address.append(pokemonEl);
                 address.append(floorPlanEl);
+                address.append(pokemonEl);
             
             }
             getPokes()
