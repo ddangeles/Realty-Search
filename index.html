@@ -13,29 +13,32 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Freehand&display=swap" rel="stylesheet">
 </head>
   <body>
    
 <nav>
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
+    <a href="#!" class="brand-logo"> <span id="san-diego">SanDiego</span>   Realty</a>
     <ul class="right hide-on-med-and-down">
-      <li><input type="text" placeholder="Enter location eg: New York " id="inputId"></li>
+      
       <!-- Dropdown Trigger -->
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Limit Results<i class="material-icons right"></i></a>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Display Results<i class="material-icons right"></i></a>
         <!-- Dropdown Structure -->
       <ul id="dropdown1" class="dropdown-content">
-      <li id="list-style" value="3">3</li>
-      <li id="list-style" value="6">6</li>
-      <li id="list-style" value="9">9</li>
-      <li id="list-style" value="12">12</li>
+      <li id="list-style" value="3">3 Results</li>
+      <li id="list-style" value="6">6 Results</li>
+      <li id="list-style" value="9">9 Results</li>
+      <li id="list-style" value="12">12 Results</li>
       </ul></li>
       </ul>
       
       
   </div>
 </nav>
-    <div id="addresses">
+    <div id="addresses" class="row">
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
