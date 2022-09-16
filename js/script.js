@@ -1,7 +1,7 @@
 
 var address = document.getElementById("addresses");
 var limit   = 3;
-// var city    = "";
+var city    = "San Diego";
  
 var pokemon;
 
@@ -11,21 +11,21 @@ $( document ).ready(function(){
     $(".dropdown-trigger").dropdown();
 
 })
-function getCity() {
-    while (address.hasChildNodes()){
-        address.removeChild(address.firstChild);
-    }
-    let city  = document.getElementById('inputId').value;
-   
-    console.log(city);
-}
+// function getCity() {
+//     while (address.hasChildNodes()){
+//         address.removeChild(address.firstChild);
+//     }
+//     city  = document.getElementById('inputId').value;
+//     console.log(city);
+// }
 
 document.addEventListener("click", function(event){
+    if(event.target.id === "list-style"){
     limit = event.target.value;
     console.log(limit);
-    getCity();
+    // getCity();
     getAddresses(limit);
-    
+    }
 })
 
 function getAddresses(limit) {
@@ -40,8 +40,8 @@ function getAddresses(limit) {
 
         params: {
 
-        state_code: 'NY',
-        city: 'New York City',
+        state_code: 'CA',
+        city: "San Diego",
         offset: '0',
         limit: limit,
         sort: 'relevance'
@@ -62,31 +62,46 @@ function getAddresses(limit) {
         for(i = 0; i < limit; i++) {
             
             console.log(response.data.listings[i]);
-
+            var column      = document.createElement("div");
+            column.setAttribute("class","col s4")
             var devEl       = document.createElement("div");
+            devEl.setAttribute("class","card");
+            devEl.style.height="550px";
+            devEl.style.width="462px";
+            var imgDiv      = document.createElement("div");
+            imgDiv.setAttribute("class","card-image");
             var imgEl       = document.createElement("img");
+            var cardContent = document.createElement("div");
+            cardContent.setAttribute("class","card-content")
             var priceEl     = document.createElement("p");
             var floorPlanEl = document.createElement("p");
             var pokemonEl   = document.createElement("div");
 
             if (response.data.listings[i].price_raw < 500000) {
 
-                pokemonEl.setAttribute("class", "animate__animated animate__jello squirtleSprite")
+                pokemonEl.setAttribute("class", "animate__animated animate__shakeY squirtleSprite")
                 pokemonEl.style.setProperty('--animate-duration', '5s')
 
             } else if (response.data.listings[i].price_raw > 500000 && response.data.listings[i].price_raw <1000000) {
 
-                pokemonEl.setAttribute("class", "animate__animated animate__jello wartortleSprite")
+                pokemonEl.setAttribute("class", "animate__animated animate__shakeY wartortleSprite")
                 pokemonEl.style.setProperty('--animate-duration', '5s')
 
             } else if (response.data.listings[i].price_raw > 1000000) {
 
-                pokemonEl.setAttribute("class", "animate__animated animate__jello blastoiseSprite")
+                pokemonEl.setAttribute("class", "animate__animated animate__shakeY blastoiseSprite")
                 pokemonEl.style.setProperty('--animate-duration', '5s')
 
             }
 
-            devEl.textContent = response.data.listings[i].address;
+            var listingAddress = response.data.listings[i].address;
+            var cardAddress = document.createElement("p");
+            cardAddress.setAttribute("class","card-title");
+            // cardAddress.style.fontSize="14px";
+            // cardAddress.style.textAlign="center";
+            // cardAddress.style.
+            cardAddress.textContent = listingAddress;
+
 
             if (response.data.listings[i].photo_count == 0) {
 
@@ -95,8 +110,11 @@ function getAddresses(limit) {
             } else {
 
                 imgEl.src = response.data.listings[i].photo;
-            }
+                
 
+            }
+            imgEl.style.height= "310px";
+            imgEl.style.width="460px"
             // imgEl.src = response.data.listings[i].photo;
 
             priceEl.textContent = "Price " + response.data.listings[i].price;
@@ -117,11 +135,21 @@ function getAddresses(limit) {
 
             floorPlanEl.textContent = floorPlanString;
             
-            address.append(imgEl);
-            address.append(devEl);
-            address.append(priceEl);
-            address.append(floorPlanEl);
-            address.append(pokemonEl);
+            imgDiv.append(imgEl);
+            devEl.append(cardAddress);
+            devEl.append(imgDiv);
+            cardContent.append(priceEl);
+            cardContent.append(floorPlanEl);
+            cardContent.append(pokemonEl);
+            devEl.append(cardContent);
+            column.append(devEl);
+            address.append(column);
+
+            // address.append(imgEl);
+            // address.append(devEl);
+            // address.append(priceEl);
+            // address.append(floorPlanEl);
+            // address.append(pokemonEl);
         
         }
 
@@ -210,7 +238,7 @@ function init() {
     while (address.hasChildNodes()){
         address.removeChild(address.firstChild);
     }
-    getCity();
+    // getCity();
     getAddresses(limit);
 
 }
