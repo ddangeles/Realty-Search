@@ -11,6 +11,7 @@ $( document ).ready(function(){
     $(".dropdown-trigger").dropdown();
 
 })
+
 // function getCity() {
 //     while (address.hasChildNodes()){
 //         address.removeChild(address.firstChild);
@@ -62,34 +63,39 @@ function getAddresses(limit) {
         for(i = 0; i < limit; i++) {
             
             console.log(response.data.listings[i]);
+
             var column      = document.createElement("div");
             column.setAttribute("class","col s4")
+
             var devEl       = document.createElement("div");
             devEl.setAttribute("class","card");
             devEl.style.height="550px";
             devEl.style.width="462px";
+
             var imgDiv      = document.createElement("div");
             imgDiv.setAttribute("class","card-image");
-            var imgEl       = document.createElement("img");
+
             var cardContent = document.createElement("div");
             cardContent.setAttribute("class","card-content")
+           
+            var imgEl       = document.createElement("img");
             var priceEl     = document.createElement("p");
             var floorPlanEl = document.createElement("p");
             var pokemonEl   = document.createElement("div");
 
             if (response.data.listings[i].price_raw < 500000) {
 
-                pokemonEl.setAttribute("class", "animate__animated animate__shakeY squirtleSprite")
+                pokemonEl.setAttribute("class", "animate__animated animate__shakeX squirtleSprite")
                 pokemonEl.style.setProperty('--animate-duration', '5s')
 
             } else if (response.data.listings[i].price_raw > 500000 && response.data.listings[i].price_raw <1000000) {
 
-                pokemonEl.setAttribute("class", "animate__animated animate__shakeY wartortleSprite")
+                pokemonEl.setAttribute("class", "animate__animated animate__shakeX wartortleSprite")
                 pokemonEl.style.setProperty('--animate-duration', '5s')
 
             } else if (response.data.listings[i].price_raw > 1000000) {
 
-                pokemonEl.setAttribute("class", "animate__animated animate__shakeY blastoiseSprite")
+                pokemonEl.setAttribute("class", "animate__animated animate__shakeX blastoiseSprite")
                 pokemonEl.style.setProperty('--animate-duration', '5s')
 
             }
@@ -135,8 +141,8 @@ function getAddresses(limit) {
 
             floorPlanEl.textContent = floorPlanString;
             
-            imgDiv.append(imgEl);
             devEl.append(cardAddress);
+            imgDiv.append(imgEl);
             devEl.append(imgDiv);
             cardContent.append(priceEl);
             cardContent.append(floorPlanEl);
@@ -150,7 +156,7 @@ function getAddresses(limit) {
             // address.append(priceEl);
             // address.append(floorPlanEl);
             // address.append(pokemonEl);
-        
+
         }
 
         getPokes()}).catch(function (error) {

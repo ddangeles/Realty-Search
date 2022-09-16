@@ -9,18 +9,25 @@
     right: 0;
     top: -65px;
 }
+
 .card-title{
     font-size: 14px !important;
     text-align: center;
     padding-top: 5px;
 }
+
 .brand-logo{
     font-size: 25px !important;
     margin-left: 10px;
     font-family: freehand;
 }
+
 #san-diego{
     color: rgb(245, 214, 214);
     font-size: 40px;
     font-family: freehand;
+}
+
+nav{
+    background-color: rgb(61, 175, 201);
 }
