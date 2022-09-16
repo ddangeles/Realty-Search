@@ -6,11 +6,15 @@ var limit   = 3;
 var pokemon;
 
 let defaultDom = document.getElementById("addresses").innerHTML;
-        
+
+$( document ).ready(function(){
+    $(".dropdown-trigger").dropdown();
+
+})
 function getCity() {
 
     let city  = document.getElementById('inputId').value;
-    limit     = document.getElementById("results").value;
+    limit     = document.getElementById("list-style").value;
     console.log(city);
     console.log(limit);
 
