@@ -9,24 +9,38 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
   <body>
-    <h4>City Search</h4>
-    <input type="text" placeholder="Enter location eg: New York " id="inputId">
-
-    <h4>Limit Results</h4>
-    <select id="results">
-      <option value = "3" >3</option>
-      <option value = "6" >6</option>
-      <option value = "9" >9</option>
-      <option value = "12">12</option>
-    </select>
-    <br></br>
-    <button type ="submit" onclick="init();">Search</button>        
-    <br></br>
+   
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <li><input type="text" placeholder="Enter location eg: New York " id="inputId"></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Limit Results<i class="material-icons right"></i></a>
+        <!-- Dropdown Structure -->
+      <ul id="dropdown1" class="dropdown-content">
+      <li id="list-style" value="3">3</li>
+      <li id="list-style" value="6">6</li>
+      <li id="list-style" value="9">9</li>
+      <li id="list-style" value="12">12</li>
+      </ul></li>
+      </ul>
+      
+      
+  </div>
+</nav>
     <div id="addresses">
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./js/script.js"></script>
   </body>
 </html>
