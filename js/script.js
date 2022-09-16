@@ -5,23 +5,33 @@ var limit   = 3;
  
 var pokemon;
 
-let defaultDom = document.getElementById("addresses").innerHTML;
+var defaultDom = document.getElementById("addresses").innerHTML;
 
 $( document ).ready(function(){
     $(".dropdown-trigger").dropdown();
 
 })
 function getCity() {
-
+    while (address.hasChildNodes()){
+        address.removeChild(address.firstChild);
+    }
     let city  = document.getElementById('inputId').value;
-    limit     = document.getElementById("list-style").value;
+   
     console.log(city);
-    console.log(limit);
-
 }
 
-function getAddresses() {
+document.addEventListener("click", function(event){
+    limit = event.target.value;
+    console.log(limit);
+    getCity();
+    getAddresses(limit);
+    
+})
 
+function getAddresses(limit) {
+    while (address.hasChildNodes()){
+        address.removeChild(address.firstChild);
+    }
     const options = {
 
         method: 'GET',
@@ -121,23 +131,30 @@ function getAddresses() {
 
     });
 
+    var blastoiseDivs = document.getElementsByClassName("blastoiseSprite")
+    var squirtleDivs = document.getElementsByClassName("squirtleSprite")
+    var wartortleDivs = document.getElementsByClassName("wartortleSprite")
+
     async function getPokes() {
 
+        
         try {
 
             const poke1 = await axios.get('https://pokeapi.co/api/v2/pokemon/squirtle')
             const poke2 = await axios.get('https://pokeapi.co/api/v2/pokemon/wartortle')
             const poke3 = await axios.get('https://pokeapi.co/api/v2/pokemon/blastoise')
 
-            console.log(poke1, poke2, poke3)
-            console.log(poke1.data.sprites.front_shiny)
+            // console.log(poke1, poke2, poke3)
+            // console.log(poke1.data.sprites.front_shiny)
 
-            var squirtleDivs = document.getElementsByClassName("squirtleSprite")
+            
 
-            console.log(squirtleDivs)
+            // console.log(squirtleDivs)
 
             for (var index = 0; index < squirtleDivs.length; index++) {
-
+                while (squirtleDivs[index].hasChildNodes()){
+                    squirtleDivs[index].removeChild(squirtleDivs[index].firstChild);
+                }
                 var squirtleImage = document.createElement("img")
                 squirtleImage.src = poke1.data.sprites.front_shiny
 
@@ -145,12 +162,15 @@ function getAddresses() {
 
             }
 
-            var wartortleDivs = document.getElementsByClassName("wartortleSprite")
+            
 
-            console.log(wartortleDivs)
+            // console.log(wartortleDivs)
 
             for (var index = 0; index < wartortleDivs.length; index++) {
-
+                while (wartortleDivs[index].hasChildNodes()){
+                    wartortleDivs[index].removeChild(wartortleDivs[index].firstChild);
+                }
+                
                 var wartortleImage = document.createElement("img")
                 wartortleImage.src = poke2.data.sprites.front_shiny
 
@@ -158,12 +178,14 @@ function getAddresses() {
 
             }
 
-            var blastoiseDivs = document.getElementsByClassName("blastoiseSprite")
+            
 
-            console.log(blastoiseDivs)
+            // console.log(blastoiseDivs)
 
             for (var index = 0; index < blastoiseDivs.length; index++) {
-
+                while (blastoiseDivs[index].hasChildNodes()){
+                    blastoiseDivs[index].removeChild(blastoiseDivs[index].firstChild);
+                }
                 var blastoiseImage = document.createElement("img")
                 blastoiseImage.src = poke3.data.sprites.front_shiny
 
@@ -185,10 +207,13 @@ function getAddresses() {
 
 function init() {
 
-    document.getElementById("addresses").innerHTML = defaultDom;
+    while (address.hasChildNodes()){
+        address.removeChild(address.firstChild);
+    }
     getCity();
-    getAddresses();
+    getAddresses(limit);
 
 }
+init();
 
 // Pokemon in use: Blastoise => Wartortle => Squirtle
