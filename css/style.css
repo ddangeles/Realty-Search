@@ -1,3 +1,6 @@
+body{
+    background-color: azure
+}
 #list-style{
     text-align: center;
     padding: 10px;
@@ -27,4 +30,6 @@
 #navbar{
     background-color:rgb(40, 152, 193)
 }
-
+/* .card{
+    background-color: azure;
+} */
