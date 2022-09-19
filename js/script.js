@@ -2,15 +2,37 @@
 var address = document.getElementById("addresses");
 var limit   = 3;
 var city    = "San Diego";
- 
+
 var pokemon;
 
 var defaultDom = document.getElementById("addresses").innerHTML;
 
+
+//navbar dropdown list materialize functionality
 $( document ).ready(function(){
     $(".dropdown-trigger").dropdown();
 
 })
+
+async function getMapURL(listingAddress){
+
+    let result;
+        try {
+            result = await $.ajax({
+            method: 'GET',
+            url: 'https://api.positionstack.com/v1/forward',
+            data: {
+            access_key: '7d2b7f731cdc2afa902de837bf9a10d0',
+            query: listingAddress,
+            limit: 1
+        }
+});
+        return result;
+}
+        catch(error){
+            console.log(error);
+        }
+} 
 // function getCity() {
 //     while (address.hasChildNodes()){
 //         address.removeChild(address.firstChild);
@@ -50,7 +72,7 @@ function getAddresses(limit) {
 
         headers: {
 
-            'X-RapidAPI-Key': '275e820486msh3fc17a74d49f814p17781cjsn6a42cad3a8e1',
+            'X-RapidAPI-Key': '186617ac64msh9a42996fe62ec00p1d7c23jsnaf6e5046d454',
             'X-RapidAPI-Host': 'realty-in-us.p.rapidapi.com'
 
         }
@@ -59,7 +81,7 @@ function getAddresses(limit) {
 
     axios.request(options).then(function (response) {
 
-        for(i = 0; i < limit; i++) {
+        for (let i = 0; i < limit; i++) {
             
             console.log(response.data.listings[i]);
             var column      = document.createElement("div");
@@ -76,6 +98,7 @@ function getAddresses(limit) {
             var priceEl     = document.createElement("p");
             var floorPlanEl = document.createElement("p");
             var pokemonEl   = document.createElement("div");
+
 
             if (response.data.listings[i].price_raw < 500000) {
 
@@ -97,11 +120,26 @@ function getAddresses(limit) {
             var listingAddress = response.data.listings[i].address;
             var cardAddress = document.createElement("p");
             cardAddress.setAttribute("class","card-title");
-            // cardAddress.style.fontSize="14px";
-            // cardAddress.style.textAlign="center";
-            // cardAddress.style.
-            cardAddress.textContent = listingAddress;
 
+                // fetch map URL
+                var urlEl = document.createElement("a");
+                urlEl.setAttribute("id",i);
+                urlEl.textContent='Click to view location on maps';
+                cardAddress.textContent = listingAddress;
+                var getURL = getMapURL(listingAddress);
+                console.log(i);
+               
+                       mapURL = getURL.then( function(result){
+                            console.log(i+" : "+result);
+                            var mapURL = result.data[0].map_url;
+                            console.log(i+" : " + mapURL);
+                            document.getElementById(i+"").setAttribute("href",mapURL);
+                            
+                        })
+                         
+                        //end fetch
+
+                        //set not found image
 
             if (response.data.listings[i].photo_count == 0) {
 
@@ -132,7 +170,7 @@ function getAddresses(limit) {
                 floorPlanString = hasBedrooms + " Bedrooms - " + hasBathrooms + " Bath";
             
             }
-
+            
             floorPlanEl.textContent = floorPlanString;
             
             imgDiv.append(imgEl);
@@ -141,6 +179,7 @@ function getAddresses(limit) {
             cardContent.append(priceEl);
             cardContent.append(floorPlanEl);
             cardContent.append(pokemonEl);
+            cardContent.append(urlEl);
             devEl.append(cardContent);
             column.append(devEl);
             address.append(column);
@@ -158,6 +197,7 @@ function getAddresses(limit) {
             console.error(error);
 
     });
+
 
     var blastoiseDivs = document.getElementsByClassName("blastoiseSprite")
     var squirtleDivs = document.getElementsByClassName("squirtleSprite")
