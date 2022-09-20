@@ -1,6 +1,6 @@
-# Realty-Search
+# San Diego Realty
 
-San Diego Realty
+Deployed link: https://ddangeles.github.io/Realty-Search/
 
 ## About The Project
 
