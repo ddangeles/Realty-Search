@@ -293,3 +293,23 @@ function init() {
 init();
 
 // Pokemon in use: Blastoise => Wartortle => Squirtle
+
+//Media Query
+
+function myFunction(x) {
+    if (x.matches) { // If media query matches
+      document.querySelector("#addresses").setAttribute("class","column");
+      document.querySelector("#nav1").style.width = "100vw"
+      
+        }
+
+        else{
+            document.querySelector("#addresses").setAttribute("class","row");
+            document.querySelector("#nav1").style.width = "100vw"
+        }
+     
+  }
+  
+  var x = window.matchMedia("(max-width: 500px)")
+  myFunction(x) // Call listener function at run time
+  x.addListener(myFunction)
