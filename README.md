@@ -19,18 +19,27 @@ As a person who is interested in browsing for houses in San Diego, they can acce
 
 ## Progression of Project
 
-<!-- Image of First Step -->
+<img src= "assets\images\image (2).png">
+
 
 The Realty API was linked and data was appended to show on loaded website. There is no framework or design yet.
 
-<!-- Image of Next Step -->
+<img src= "assets\images\Screen Shot 2022-09-19 at 9.08.10 AM.png">
+
 
 This is where a search bar and results drop down option was added.
 
-<!-- Image of Next Step -->
+<img src= "assets\images\image (1).png">
+
 
 Each house was put inside of a card and design was added.
 
-<img src= "assets\images\404.jpg">
+<img src= "assets\images\Screen Shot 2022-09-19 at 10.55.23 AM.png">
 
 The design was finalized, sq ft and price per sq ft was added.
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
